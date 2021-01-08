@@ -2,7 +2,7 @@ import React from 'react';
 
 const layout = (props) => (
   <>
-    <div>
+    <div className="mb-5">
       Toolbar, SideDrawer, Backdrop
     </div>
     <main>
