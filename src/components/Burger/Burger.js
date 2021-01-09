@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./Burger.sass";
+import classes from "./Burger.module.sass";
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient"
 
 const burger = (props) => {
