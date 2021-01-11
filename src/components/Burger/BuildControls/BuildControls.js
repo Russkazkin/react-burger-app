@@ -9,13 +9,14 @@ const controls = [
   {label: 'Meat', type: 'meat'},
 ];
 
-const buildControls = ({ingredientAdded, ingredientRemoved}) => (
+const buildControls = ({ingredientAdded, ingredientRemoved, disabled}) => (
   <div className={"w-full flex flex-col text-center shadow-sm m-auto py-2.5 " + classes.BuildControls}>
     {controls.map((ctrl) => (
       <BuildControl key={ctrl.label}
                     label={ctrl.label}
                     added={() => ingredientAdded(ctrl.type)}
-                    removed={() => ingredientRemoved(ctrl.type)}/>
+                    removed={() => ingredientRemoved(ctrl.type)}
+                    disabled={disabled[ctrl.type]} />
     ))}
   </div>
 );
