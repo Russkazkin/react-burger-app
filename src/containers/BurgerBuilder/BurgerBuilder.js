@@ -2,7 +2,8 @@ import React, {Component} from "react";
 
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
-import {INGREDIENT_PRICE} from "../../data/ingredientPrice"
+import Modal from "../../components/UI/Modal/Modal";
+import {INGREDIENT_PRICE} from "../../data/ingredientPrice";
 
 class BurgerBuilder extends Component {
   state = {
@@ -52,6 +53,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <>
+        <Modal />
         <Burger ingredients={this.state.ingredients} />
         <BuildControls ingredientAdded={this.addIngredientHandler}
                        ingredientRemoved={this.removeIngredientHandler}
