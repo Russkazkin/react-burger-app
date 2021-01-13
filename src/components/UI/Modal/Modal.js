@@ -1,9 +1,9 @@
 import React from "react";
 
-const modal = (props) => (
-  <div
+const modal = ({show, children}) => (
+  <div style={{transform: show ? 'translateX(50%)' : 'translateX(-100vw)', opacity: show ? '1' : '0'}}
     className="fixed
-               z-500
+               z-50
                bg-white
                w-3/4
                border
@@ -19,9 +19,8 @@ const modal = (props) => (
                sm:w-128
                right-1/2
                transform
-               translate-x-1/2
                translate-y-1/2">
-    {props.children}
+    {children}
   </div>
 );
 

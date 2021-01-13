@@ -9,7 +9,7 @@ const controls = [
   {label: 'Meat', type: 'meat'},
 ];
 
-const buildControls = ({ingredientAdded, ingredientRemoved, disabled, price, purchasable}) => (
+const buildControls = ({ingredientAdded, ingredientRemoved, disabled, price, purchasable, purchasing}) => (
   <div className={"w-full flex flex-col text-center shadow-sm m-auto py-2.5 " + classes.BuildControls}>
     <div className="py-5 text-white">Current Price: <strong>${price}</strong></div>
     {controls.map((ctrl) => (
@@ -20,7 +20,7 @@ const buildControls = ({ingredientAdded, ingredientRemoved, disabled, price, pur
                     disabled={disabled[ctrl.type]} />
     ))}
     <div className="my-5">
-      <button disabled={!purchasable} className="disabled:opacity-50 block p-1.5 mx-auto w-40 text-white border cursor-pointer focus:outline-none focus:outline-white bg-green-500 rounded-full hover:bg-green-300 hover:text-gray-700">
+      <button onClick={purchasing} disabled={!purchasable} className="disabled:opacity-50 block p-1.5 mx-auto w-40 text-white border cursor-pointer focus:outline-none focus:outline-white bg-green-500 rounded-full hover:bg-green-300 hover:text-gray-700">
         ORDER NOW
       </button>
     </div>
