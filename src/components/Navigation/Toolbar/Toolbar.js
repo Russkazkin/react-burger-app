@@ -1,5 +1,7 @@
 import React from "react";
 
+
+import DesktopNavigation from "../DesktopNavigation/DesktopNavigation"
 import burgerLogo from "../../../assets/images/burger-logo.png";
 
 const toolbar = ({profileMenu, toggleProfileMenu}) => (
@@ -24,14 +26,7 @@ const toolbar = ({profileMenu, toggleProfileMenu}) => (
             <img className="block lg:hidden h-8 w-auto" src={burgerLogo} alt="Workflow"/>
             <img className="hidden lg:block h-8 w-auto" src={burgerLogo} alt="Workflow"/>
           </div>
-          <div className="hidden sm:block sm:ml-6">
-            <div className="flex space-x-4">
-              <button className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</button>
-              <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</button>
-              <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</button>
-              <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</button>
-            </div>
-          </div>
+          <DesktopNavigation />
         </div>
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
