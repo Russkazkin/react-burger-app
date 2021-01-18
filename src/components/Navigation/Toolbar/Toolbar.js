@@ -5,7 +5,7 @@ import DesktopNavigation from "../DesktopNavigation/DesktopNavigation"
 import burgerLogo from "../../../assets/images/burger-logo.png";
 
 const toolbar = ({profileMenu, toggleProfileMenu}) => (
-  <nav className="bg-gray-800">
+  <nav className="bg-brown-lightest">
     <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div className="relative flex items-center justify-between h-16">
         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
