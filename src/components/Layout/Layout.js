@@ -5,6 +5,7 @@ class Layout extends Component {
 
   state = {
     profileMenuOpen: false,
+    mobileMenuOpen: false,
   }
 
   profileMenuHandler = () => {
@@ -15,10 +16,21 @@ class Layout extends Component {
     })
   }
 
+  mobileMenuHandler = () => {
+    let {mobileMenuOpen} = this.state;
+    mobileMenuOpen = !mobileMenuOpen;
+    this.setState({
+      mobileMenuOpen: mobileMenuOpen,
+    })
+  }
+
   render() {
     return (
       <>
-        <Toolbar profileMenu={this.state.profileMenuOpen} toggleProfileMenu={this.profileMenuHandler}/>
+        <Toolbar profileMenu={this.state.profileMenuOpen}
+                 mobileMenu={this.state.mobileMenuOpen}
+                 toggleProfileMenu={this.profileMenuHandler}
+                 toggleMobileMenu={this.mobileMenuHandler} />
         <div className="mb-5">
           SideDrawer, Backdrop
         </div>
