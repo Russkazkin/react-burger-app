@@ -3,25 +3,14 @@ import React from "react";
 
 import DesktopNavigation from "../DesktopNavigation/DesktopNavigation";
 import MobileNavigation from "../MobileNavigation/MobileNavigation";
+import BurgerButton from "../MobileNavigation/BurgerButton/burgerButton";
 import burgerLogo from "../../../assets/images/burger-logo.png";
 
 const toolbar = ({profileMenu, toggleProfileMenu, mobileMenu, toggleMobileMenu}) => (
   <nav className="bg-brown-lightest">
     <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div className="relative flex items-center justify-between h-16">
-        <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-
-          <button onClick={toggleMobileMenu} className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
-            <span className="sr-only">Open main menu</span>
-
-            <svg className="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <svg className="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-          </button>
-        </div>
+      <BurgerButton showNav={toggleMobileMenu} isOpened={mobileMenu} />
         <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div className="flex-shrink-0 flex items-center">
             <img className="block lg:hidden h-8 w-auto" src={burgerLogo} alt="Workflow"/>
