@@ -10,19 +10,15 @@ class Layout extends Component {
   }
 
   profileMenuHandler = () => {
-    let {profileMenuOpen} = this.state;
-    profileMenuOpen = !profileMenuOpen;
-    this.setState({
-      profileMenuOpen: profileMenuOpen,
-    })
+    this.setState((prevState) => {
+      return {profileMenuOpen: !prevState.profileMenuOpen}
+    });
   }
 
   mobileMenuHandler = () => {
-    let {mobileMenuOpen} = this.state;
-    mobileMenuOpen = !mobileMenuOpen;
-    this.setState({
-      mobileMenuOpen: mobileMenuOpen,
-    })
+    this.setState((prevState) => {
+      return {mobileMenuOpen: !prevState.mobileMenuOpen}
+    });
   }
 
   render() {
