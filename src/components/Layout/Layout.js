@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Toolbar from '../Navigation/Toolbar/Toolbar'
+import Backdrop from "../UI/Backdrop/Backdrop";
 
 class Layout extends Component {
 
@@ -26,7 +27,8 @@ class Layout extends Component {
 
   render() {
     return (
-      <>
+      <div className="pt-16">
+        <Backdrop show={this.state.mobileMenuOpen} backdropOff={this.mobileMenuHandler}/>
         <Toolbar profileMenu={this.state.profileMenuOpen}
                  mobileMenu={this.state.mobileMenuOpen}
                  toggleProfileMenu={this.profileMenuHandler}
@@ -35,7 +37,7 @@ class Layout extends Component {
           SideDrawer, Backdrop
         </div>
         <main> {this.props.children}</main>
-      </>
+      </div>
     );
   }
 }
