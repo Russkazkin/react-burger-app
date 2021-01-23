@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 
 import DesktopNavigation from "../DesktopNavigation/DesktopNavigation";
 import MobileNavigation from "../MobileNavigation/MobileNavigation";
@@ -66,5 +66,12 @@ const toolbar = ({profileMenu, toggleProfileMenu, mobileMenu, toggleMobileMenu})
     <MobileNavigation mobileOpen={mobileMenu}/>
   </nav>
 );
+
+toolbar.propTypes = {
+  profileMenu: PropTypes.bool.isRequired,
+  toggleProfileMenu: PropTypes.bool.isRequired,
+  mobileMenu: PropTypes.func.isRequired,
+  toggleMobileMenu: PropTypes.func.isRequired,
+}
 
 export default toolbar;

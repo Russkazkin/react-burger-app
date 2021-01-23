@@ -23,15 +23,12 @@ class Layout extends Component {
 
   render() {
     return (
-      <div className="pt-16">
+      <div className="pt-20">
         <Backdrop show={this.state.mobileMenuOpen} backdropOff={this.mobileMenuHandler}/>
         <Toolbar profileMenu={this.state.profileMenuOpen}
                  mobileMenu={this.state.mobileMenuOpen}
                  toggleProfileMenu={this.profileMenuHandler}
                  toggleMobileMenu={this.mobileMenuHandler} />
-        <div className="mb-5">
-          SideDrawer, Backdrop
-        </div>
         <main> {this.props.children}</main>
       </div>
     );
