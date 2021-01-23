@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Toolbar from '../Navigation/Toolbar/Toolbar'
-import Backdrop from "../UI/Backdrop/Backdrop";
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 class Layout extends Component {
 

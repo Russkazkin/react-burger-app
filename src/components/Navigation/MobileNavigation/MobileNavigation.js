@@ -1,7 +1,5 @@
 import React from "react";
 
-import Backdrop from "../../UI/Backdrop/Backdrop";
-
 import MobileNavigationItem from "./MobileNavigationItem/MobileNavigationItem";
 
 const mobileNavigation = ({mobileOpen}) => (
