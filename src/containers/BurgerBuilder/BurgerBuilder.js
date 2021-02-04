@@ -26,6 +26,7 @@ class BurgerBuilder extends Component {
     try {
       const ingredients = (await axios.get('ingredients.json')).data;
       this.setState({ingredients: ingredients});
+      this.updatePurchaseState(this.state.ingredients);
     } catch (e) {
       this.setState({isError: true});
       console.log(e.response);
