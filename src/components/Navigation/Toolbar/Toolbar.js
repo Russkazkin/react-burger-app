@@ -69,8 +69,8 @@ const toolbar = ({profileMenu, toggleProfileMenu, mobileMenu, toggleMobileMenu})
 
 toolbar.propTypes = {
   profileMenu: PropTypes.bool.isRequired,
-  toggleProfileMenu: PropTypes.bool.isRequired,
-  mobileMenu: PropTypes.func.isRequired,
+  toggleProfileMenu: PropTypes.func.isRequired,
+  mobileMenu: PropTypes.bool.isRequired,
   toggleMobileMenu: PropTypes.func.isRequired,
 }
 
