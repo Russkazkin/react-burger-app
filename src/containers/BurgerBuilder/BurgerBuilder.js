@@ -17,14 +17,20 @@ class BurgerBuilder extends Component {
     purchasable: false,
     purchasing: false,
     loading: false,
+    isError: false,
   };
 
   async componentDidMount() {
+    this.setState({loading: true});
+    this.setState({isError: false});
     try {
       const ingredients = (await axios.get('ingredients.json')).data;
-      this.setState({ingredients: ingredients})
+      this.setState({ingredients: ingredients});
     } catch (e) {
+      this.setState({isError: true});
       console.log(e.response);
+    } finally {
+      this.setState({loading: false});
     }
   }
 
@@ -117,6 +123,9 @@ class BurgerBuilder extends Component {
                                    closeModal={this.modalHandler}
                                    continuePurchase={this.purchaseContinueHandler}
                                    ingredients={this.state.ingredients} />
+    }
+    if(this.state.isError && !this.state.loading) {
+      burger = <h3 className="text-center font-bold text-brown-darkest">Network problems. Please contact us by phone.</h3>
     }
 
     if (this.state.loading) {
