@@ -71,7 +71,8 @@ class BurgerBuilder extends Component {
       this.setState({purchasing: false});
   }
   purchaseContinueHandler = async () => {
-    this.setState({loading: true});
+    this.props.history.push('/checkout');
+    /*this.setState({loading: true});
     const order = {
       ingredients: this.state.ingredients,
       price: this.state.totalPrice,
@@ -97,7 +98,7 @@ class BurgerBuilder extends Component {
         purchasing: false,
         loading: false,
       });
-    }
+    }*/
   }
 
   render() {

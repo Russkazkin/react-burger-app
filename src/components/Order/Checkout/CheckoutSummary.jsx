@@ -2,7 +2,7 @@ import React from "react";
 
 import Burger from "../../Burger/Burger"
 
-const checkoutSummary = ({ingredients}) => {
+const checkoutSummary = ({ingredients, checkoutContinued, checkoutCanceled}) => {
   return (
     <div className="text-center w-4/5 m-auto">
       <h1 className="text-2xl">We hope it tastes well!</h1>
@@ -11,10 +11,10 @@ const checkoutSummary = ({ingredients}) => {
       </div>
       <div className="flex justify-center mb-40">
         <button className="disabled:opacity-50 block p-1.5 mx-1.5 w-20 text-white border cursor-pointer focus:outline-none focus:outline-white bg-indigo-500 rounded-full hover:bg-indigo-300 hover:text-gray-700"
-                onClick={() => {}}>Continue
+                onClick={checkoutContinued}>Continue
         </button>
         <button className="block p-1.5 mx-1.5 w-20 text-white border cursor-pointer focus:outline-none focus:outline-white bg-red-500 rounded-full hover:bg-red-300 hover:text-gray-700"
-                onClick={() => {}}>Cancel
+                onClick={checkoutCanceled}>Cancel
         </button>
       </div>
     </div>
