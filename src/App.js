@@ -14,7 +14,6 @@ class App extends Component {
         <Switch>
           <Redirect exact from="/" to="/burger" />
           <Route path="/burger" component={BurgerBuilder} />
-          <Route path="/checkout/contact-data" component={ContactData} />
           <Route path="/checkout" component={Checkout} />
         </Switch>
       </Layout>
