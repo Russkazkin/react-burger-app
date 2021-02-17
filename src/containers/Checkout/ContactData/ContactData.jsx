@@ -20,23 +20,23 @@ class ContactData extends Component {
               <div className="w-full p-2">
                 <div className="relative">
                   <input type="text" id="name" name="name" placeholder="Your name"
-                         className="w-full px-4 py-2 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"/>
+                         className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
                 </div>
               </div>
               <div className="w-full p-2">
                 <input type="email" id="email" name="email" placeholder="Your email"
-                       className="w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"/>
+                       className="w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
               </div>
               <div className="w-full p-2">
                 <div className="relative">
                   <input type="text" id="street" name="street" placeholder="Street"
-                         className="w-full px-4 py-2 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"/>
+                         className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
                 </div>
               </div>
               <div className="w-full p-2">
                 <div className="relative">
                   <input type="text" id="postal" name="postal" placeholder="Postal code"
-                         className="w-full px-4 py-2 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"/>
+                         className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
                 </div>
               </div>
               <div className="w-full p-2 ">
