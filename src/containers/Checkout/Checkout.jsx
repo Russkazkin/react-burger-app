@@ -5,12 +5,8 @@ import CheckoutSummary from "../../components/Order/Checkout/CheckoutSummary"
 import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
-  state = {
-    ingredients: null,
-    totalPrice: 0,
-  }
-
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
     let price = 0;
@@ -21,7 +17,10 @@ class Checkout extends Component {
         ingredients[param[0]] = parseInt(param[1]);
       }
     }
-    this.setState({ingredients: ingredients, totalPrice: price});
+    this.state = {
+      ingredients: ingredients,
+      totalPrice: price,
+    }
   }
 
   checkoutCancelHandler = () => this.props.history.goBack();
