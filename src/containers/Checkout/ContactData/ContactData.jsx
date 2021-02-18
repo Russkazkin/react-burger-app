@@ -35,7 +35,6 @@ class ContactData extends Component {
     try {
       const response = (await axios.post('orders.json', order)).data;
       console.log(response);
-      this.props.history.push('/');
     } catch (error) {
       console.log(error.response);
     } finally {
@@ -43,30 +42,37 @@ class ContactData extends Component {
         loading: false,
       });
     }
+    this.props.history.push('/');
   }
 
   render() {
-    let form = (<section className="text-gray-700 body-font">
+    let form  = (
+      <div>
+        <div className="w-full p-2">
+          <div className="relative">
+            <input type="text" id="name" name="name" placeholder="Your name"
+                   className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
+          </div>
+        </div>
+        <div className="w-full p-2">
+          <input type="email" id="email" name="email" placeholder="Your email"
+                 className="w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
+        </div>
+        <div className="w-full p-2">
+          <div className="relative">
+            <input type="text" id="street" name="street" placeholder="Street"
+                   className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
+          </div>
+        </div>
+      </div>
+    );
+    if (this.state.loading) form = <Spinner />
+    return (<section className="text-gray-700 body-font">
       <div className="container px-8 pt-24 pb-24 mx-auto lg:px-4">
         <h4 className="text-center font-bold text-lg mb-3">Enter your contact data</h4>
         <div className="flex flex-col w-full p-8 mx-auto mt-10 border rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
           <div className="flex flex-wrap -m-2">
-            <div className="w-full p-2">
-              <div className="relative">
-                <input type="text" id="name" name="name" placeholder="Your name"
-                       className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
-              </div>
-            </div>
-            <div className="w-full p-2">
-              <input type="email" id="email" name="email" placeholder="Your email"
-                     className="w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
-            </div>
-            <div className="w-full p-2">
-              <div className="relative">
-                <input type="text" id="street" name="street" placeholder="Street"
-                       className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>
-              </div>
-            </div>
+            {form}
             <div className="w-full p-2">
               <div className="relative">
                 <input type="text" id="postal" name="postal" placeholder="Postal code"
@@ -83,8 +89,6 @@ class ContactData extends Component {
         </div>
       </div>
     </section>);
-    if (this.state.loading) form = <Spinner />
-    return form;
   }
 }
 
