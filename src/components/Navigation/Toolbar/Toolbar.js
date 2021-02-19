@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {withRouter} from "react-router-dom";
 
 import DesktopNavigation from "../DesktopNavigation/DesktopNavigation";
 import MobileNavigation from "../MobileNavigation/MobileNavigation";
@@ -74,4 +75,4 @@ toolbar.propTypes = {
   toggleMobileMenu: PropTypes.func.isRequired,
 }
 
-export default toolbar;
+export default withRouter(toolbar);
