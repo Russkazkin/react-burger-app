@@ -9,6 +9,15 @@ const input = ({elementType, elementConfig, value}) => {
     case ('textarea'):
       inputElement = <textarea {...elementConfig} value={value} />
       break;
+    case ('select'):
+      inputElement = (<label className="block ">
+        <label htmlFor="email" className="text-sm leading-7 text-gray-600">{elementConfig.label}</label>
+        <select value={value}
+          className="block w-full px-4 py-2 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+          {elementConfig.options.map(option => <option key={option.value} value={option.value}>{option.displayValue}</option>)}
+        </select>
+      </label>)
+      break;
     default:
       inputElement = '';
   }
