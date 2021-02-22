@@ -1,10 +1,10 @@
-const input = ({elementType, elementConfig, value, changed, name}) => {
+const input = ({elementType, elementConfig, value, changed, name, valid}) => {
   let inputElement = null;
 
   switch (elementType) {
     case ('input'):
       inputElement = <input {...elementConfig} value={value} onChange={changed} name={name}
-                            className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>;
+                            className={`${valid ? 'border-green-700' : 'border-red-700'} w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:bg-white`} />;
       break;
     case ('textarea'):
       inputElement = <textarea {...elementConfig} value={value} onChange={changed} />
