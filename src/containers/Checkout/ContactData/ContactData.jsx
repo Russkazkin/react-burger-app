@@ -119,6 +119,7 @@ class ContactData extends Component {
           {formElementsArray.map(formElement => <Input elementType={formElement.config.elementType}
                                                        elementConfig={formElement.config.elementConfig}
                                                        value={formElement.config.value}
+                                                       name={formElement.id}
                                                        changed={(event) => this.inputChangedHandler(event, formElement.id)}
                                                        key={formElement.id}/>)}
           <div className="w-full p-2 ">

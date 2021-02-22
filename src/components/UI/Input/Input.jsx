@@ -1,9 +1,9 @@
-const input = ({elementType, elementConfig, value, changed}) => {
+const input = ({elementType, elementConfig, value, changed, name}) => {
   let inputElement = null;
 
   switch (elementType) {
     case ('input'):
-      inputElement = <input {...elementConfig} value={value} onChange={changed}
+      inputElement = <input {...elementConfig} value={value} onChange={changed} name={name}
                             className="w-full px-4 py-2 bg-gray-100 outline-none border-transparent border-2 rounded-lg focus:border-brown-lightest focus:bg-white"/>;
       break;
     case ('textarea'):
