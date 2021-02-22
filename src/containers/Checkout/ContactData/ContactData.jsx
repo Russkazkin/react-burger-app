@@ -71,12 +71,18 @@ class ContactData extends Component {
     loading: false,
   }
 
-  orderHandler = async () => {
+  orderHandler = async (event) => {
+    event.preventDefault();
     const {ingredients, price} = this.props;
     this.setState({loading: true});
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm) {
+      formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
+    }
     const order = {
       ingredients: ingredients,
       price: price,
+      orderData: formData,
     }
     try {
       const response = (await axios.post('orders.json', order)).data;
@@ -108,19 +114,21 @@ class ContactData extends Component {
       });
     }
     let form  = (
-      <div className="w-full">
-        {formElementsArray.map(formElement => <Input elementType={formElement.config.elementType}
-                                                     elementConfig={formElement.config.elementConfig}
-                                                     value={formElement.config.value}
-                                                     changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                                                     key={formElement.id}/>)}
-        <div className="w-full p-2 ">
-          <button
-            onClick={this.orderHandler}
-            className="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">Order
-          </button>
+      <form onSubmit={this.orderHandler}>
+        <div className="w-full">
+          {formElementsArray.map(formElement => <Input elementType={formElement.config.elementType}
+                                                       elementConfig={formElement.config.elementConfig}
+                                                       value={formElement.config.value}
+                                                       changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                                                       key={formElement.id}/>)}
+          <div className="w-full p-2 ">
+            <button
+              onClick={this.orderHandler}
+              className="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">Order
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     );
     if (this.state.loading) form = <Spinner />
     return (<section className="text-gray-700 body-font">
