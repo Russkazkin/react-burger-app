@@ -98,9 +98,11 @@ class ContactData extends Component {
           ],
         },
         value: 'fastest',
+        valid: true,
       },
     },
     loading: false,
+    formIsValid: false,
   }
 
   orderHandler = async (event) => {
@@ -150,7 +152,12 @@ class ContactData extends Component {
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-    this.setState({orderForm: updatedOrderForm});
+
+    let formIsValid = true;
+    for (let formIdentifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[formIdentifier].valid && formIsValid;
+    }
+    this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
   };
 
   render() {
@@ -162,7 +169,7 @@ class ContactData extends Component {
       });
     }
     let form  = (
-      <form onSubmit={this.orderHandler}>
+      <form onSubmit={this.orderHandler} className="w-full">
         <div className="w-full">
           {formElementsArray.map(formElement => <Input elementType={formElement.config.elementType}
                                                        elementConfig={formElement.config.elementConfig}
@@ -174,8 +181,8 @@ class ContactData extends Component {
                                                        key={formElement.id}/>)}
           <div className="w-full p-2 ">
             <button
-              onClick={this.orderHandler}
-              className="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">Order
+              disabled={!this.state.formIsValid}
+              className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">Order
             </button>
           </div>
         </div>
