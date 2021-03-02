@@ -20,7 +20,7 @@ class BurgerBuilder extends Component {
     isError: false,
   };
 
-  async componentDidMount() {
+  /*async componentDidMount() {
     this.setState({loading: true});
     this.setState({isError: false});
     try {
@@ -33,7 +33,7 @@ class BurgerBuilder extends Component {
     } finally {
       this.setState({loading: false});
     }
-  }
+  }*/
 
   updatePurchaseState = (ingredients) => {
     const sum = Object.values(ingredients).reduce((sum, el) => sum + el, 0);
