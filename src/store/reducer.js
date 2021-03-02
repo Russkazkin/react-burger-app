@@ -1,7 +1,7 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-  ingredients: {salad: 0, meat: 1, cheese: 1, bacon: 1},
+  ingredients: {salad: 0, meat: 1, cheese: 1, bacon: 0},
   totalPrice: 4,
 };
 const reducer = (state = initialState, action) => {
