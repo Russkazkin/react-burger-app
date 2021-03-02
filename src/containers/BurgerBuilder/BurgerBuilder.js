@@ -14,7 +14,6 @@ import {INGREDIENT_PRICE} from "../../data/ingredientPrice";
 
 class BurgerBuilder extends Component {
   state = {
-    totalPrice: 4,
     purchasable: false,
     purchasing: false,
     loading: false,
@@ -41,30 +40,6 @@ class BurgerBuilder extends Component {
     this.setState({purchasable: sum > 0})
   };
 
-  addIngredientHandler = (type) => {
-    const updatedCount = this.state.ingredients[type] + 1;
-    const updatedIngredients = {...this.state.ingredients};
-    updatedIngredients[type] = updatedCount;
-    const newPrice = this.state.totalPrice + INGREDIENT_PRICE[type];
-    this.setState({
-      totalPrice: newPrice,
-      ingredients: updatedIngredients,
-    });
-    this.updatePurchaseState(updatedIngredients);
-  };
-  removeIngredientHandler = (type) => {
-    if(this.state.ingredients[type] < 1) return;
-    const updatedCount = this.state.ingredients[type] - 1;
-    const updatedIngredients = {...this.state.ingredients};
-    updatedIngredients[type] = updatedCount;
-    const newPrice = this.state.totalPrice - INGREDIENT_PRICE[type];
-    this.setState({
-      totalPrice: newPrice,
-      ingredients: updatedIngredients,
-    });
-    this.updatePurchaseState(updatedIngredients);
-  };
-
   purchaseHandler = () => {
     this.setState({purchasing: true});
   }
@@ -87,7 +62,7 @@ class BurgerBuilder extends Component {
   }
 
   render() {
-    const {ingredients, onIngredientAdded, onIngredientRemoved} = this.props
+    const {ingredients, totalPrice, onIngredientAdded, onIngredientRemoved} = this.props
     const disabledInfo = {...ingredients};
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] < 1;
@@ -104,10 +79,10 @@ class BurgerBuilder extends Component {
                          purchasable={this.state.purchasable}
                          purchasing={this.purchaseHandler}
                          disabled={disabledInfo}
-                         price={this.state.totalPrice.toFixed(2)} />
+                         price={totalPrice.toFixed(2)} />
         </>
       );
-      orderSummary = <OrderSummary total={this.state.totalPrice}
+      orderSummary = <OrderSummary total={totalPrice}
                                    closeModal={this.modalHandler}
                                    continuePurchase={this.purchaseContinueHandler}
                                    ingredients={ingredients} />
@@ -134,6 +109,7 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
+    totalPrice: state.totalPrice
   }
 };
 const mapDispatchToProps = dispantch => {
