@@ -9,12 +9,10 @@ import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import {INGREDIENT_PRICE} from "../../data/ingredientPrice";
 
 
 class BurgerBuilder extends Component {
   state = {
-    purchasable: false,
     purchasing: false,
     loading: false,
     isError: false,
@@ -35,9 +33,9 @@ class BurgerBuilder extends Component {
     }
   }*/
 
-  updatePurchaseState = (ingredients) => {
-    const sum = Object.values(ingredients).reduce((sum, el) => sum + el, 0);
-    this.setState({purchasable: sum > 0})
+  updatePurchaseState = () => {
+    const sum = Object.values(this.props.ingredients).reduce((sum, el) => sum + el, 0);
+    return sum > 0;
   };
 
   purchaseHandler = () => {
@@ -76,7 +74,7 @@ class BurgerBuilder extends Component {
           <Burger ingredients={ingredients} />
           <BuildControls ingredientAdded={onIngredientAdded}
                          ingredientRemoved={onIngredientRemoved}
-                         purchasable={this.state.purchasable}
+                         purchasable={this.updatePurchaseState()}
                          purchasing={this.purchaseHandler}
                          disabled={disabledInfo}
                          price={totalPrice.toFixed(2)} />
