@@ -10,11 +10,11 @@ import "typeface-open-sans";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import reducer from "./store/reducer";
+import burgerBuilder from "./store/reducers/burgerBuilder";
 
 dotenv.config({path: '../.env'});
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(burgerBuilder, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>
