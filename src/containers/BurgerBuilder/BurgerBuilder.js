@@ -15,24 +15,7 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    loading: false,
-    isError: false,
   };
-
-  /*async componentDidMount() {
-    this.setState({loading: true});
-    this.setState({isError: false});
-    try {
-      const ingredients = (await axios.get('ingredients.json')).data;
-      this.setState({ingredients: ingredients});
-      this.updatePurchaseState(this.state.ingredients);
-    } catch (e) {
-      this.setState({isError: true});
-      console.log(e.response);
-    } finally {
-      this.setState({loading: false});
-    }
-  }*/
 
   updatePurchaseState = () => {
     const sum = Object.values(this.props.ingredients).reduce((sum, el) => sum + el, 0);
@@ -77,10 +60,6 @@ class BurgerBuilder extends Component {
     }
     if(this.state.isError && !this.state.loading) {
       burger = <h3 className="text-center font-bold text-brown-darkest">Network problems. Please contact us by phone.</h3>
-    }
-
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
     }
 
     return (

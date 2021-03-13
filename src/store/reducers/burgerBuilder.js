@@ -2,8 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 import {INGREDIENT_PRICE} from "../../data/ingredientPrice";
 
 const initialState = {
-  ingredients: {salad: 0, meat: 1, cheese: 1, bacon: 0},
+  ingredients: null,
   totalPrice: 4,
+  error: false,
 };
 const burgerBuilder = (state = initialState, action) => {
   switch (action.type) {
