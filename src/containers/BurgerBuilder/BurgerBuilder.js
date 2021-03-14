@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from "../../axios-orders";
 import { connect } from "react-redux";
 
-import { addIngredient, removeIngredient } from '../../store/actions';
+import { addIngredient, removeIngredient, initIngredients } from '../../store/actions';
 
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
@@ -16,6 +16,10 @@ class BurgerBuilder extends Component {
   state = {
     purchasing: false,
   };
+
+  componentDidMount() {
+    this.props.onInitIngredients();
+  }
 
   updatePurchaseState = () => {
     const sum = Object.values(this.props.ingredients).reduce((sum, el) => sum + el, 0);
@@ -40,7 +44,7 @@ class BurgerBuilder extends Component {
     }
     let orderSummary = null;
 
-    let burger = <Spinner />;
+    let burger = this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
     if (ingredients) {
       burger = (
         <>
@@ -76,13 +80,15 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    error: state.error
   }
 };
-const mapDispatchToProps = dispantch => {
+const mapDispatchToProps = dispatch => {
   return {
-    onIngredientAdded: (ingredient) => dispantch(addIngredient(ingredient)),
-    onIngredientRemoved: (ingredient) => dispantch(removeIngredient(ingredient)),
+    onIngredientAdded: (ingredient) => dispatch(addIngredient(ingredient)),
+    onIngredientRemoved: (ingredient) => dispatch(removeIngredient(ingredient)),
+    onInitIngredients: () => dispatch(initIngredients())
   }
 };
 
