@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
-import { purchaseBurgerStart } from "../../../store/actions";
+import { purchaseBurger } from "../../../store/actions";
 
 class ContactData extends Component {
   state = {
@@ -105,13 +105,12 @@ class ContactData extends Component {
         valid: true,
       },
     },
-    loading: false,
     formIsValid: false,
   }
 
   orderHandler = async (event) => {
     event.preventDefault();
-    const {ingredients, price, purchaseBurgerStart} = this.props;
+    const {ingredients, price, purchaseBurger, loading} = this.props;
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
@@ -122,7 +121,7 @@ class ContactData extends Component {
       orderData: formData,
     }
 
-    purchaseBurgerStart(order);
+    purchaseBurger(order);
 
     try {
       const response = (await axios.post('orders.json', order)).data;
@@ -195,7 +194,7 @@ class ContactData extends Component {
         </div>
       </form>
     );
-    if (this.state.loading) form = <Spinner />
+    if (this.loading) form = <Spinner />
     return (<section className="text-gray-700 body-font">
       <div className="container px-8 pt-24 pb-24 mx-auto lg:px-4">
         <h4 className="text-center font-bold text-lg mb-3">Enter your contact data</h4>
@@ -212,13 +211,14 @@ class ContactData extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
-    price: state.totalPrice
+    price: state.totalPrice,
+    loading: state.loading
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrderBurger: (data) => dispatch(purchaseBurgerStart(data))
+    onOrderBurger: (data) => dispatch(purchaseBurger(data))
   }
 }
 
