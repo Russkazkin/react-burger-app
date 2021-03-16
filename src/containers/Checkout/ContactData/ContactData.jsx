@@ -110,7 +110,7 @@ class ContactData extends Component {
 
   orderHandler = async (event) => {
     event.preventDefault();
-    const {ingredients, price, purchaseBurger, loading} = this.props;
+    const {ingredients, price, onOrderBurger, loading} = this.props;
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
@@ -121,7 +121,7 @@ class ContactData extends Component {
       orderData: formData,
     }
 
-    purchaseBurger(order);
+    onOrderBurger(order);
 
     try {
       const response = (await axios.post('orders.json', order)).data;
@@ -210,9 +210,9 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients,
-    price: state.totalPrice,
-    loading: state.loading
+    ingredients: state.burgerBuilderReducer.ingredients,
+    price: state.burgerBuilderReducer.totalPrice,
+    loading: state.orderReducer.loading
   }
 }
 
