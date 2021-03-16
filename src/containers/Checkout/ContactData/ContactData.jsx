@@ -123,16 +123,6 @@ class ContactData extends Component {
 
     onOrderBurger(order);
 
-    try {
-      const response = (await axios.post('orders.json', order)).data;
-      console.log(response);
-    } catch (error) {
-      console.log(error.response);
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
     this.props.history.push('/');
   }
 
