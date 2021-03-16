@@ -120,10 +120,7 @@ class ContactData extends Component {
       price: price,
       orderData: formData,
     }
-
     onOrderBurger(order);
-
-    this.props.history.push('/');
   }
 
   checkValidity(value, rules) {
