@@ -11,24 +11,7 @@ class Orders extends Component {
   }
 
   async componentDidMount() {
-    try {
-      const data = (await axios.get('orders.json')).data;
-      const orders = [];
-      for (let key in data) {
-        if (data.hasOwnProperty(key)) {
-          orders.push({
-            id: key,
-            ...data[key]
-          });
-        }
-      }
-      this.setState({orders: orders});
-      console.log(this.state.orders);
-    } catch (e) {
-      console.log(e.response);
-    } finally {
-      this.setState({loading: false});
-    }
+
   }
 
   render() {
