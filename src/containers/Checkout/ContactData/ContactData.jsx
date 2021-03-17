@@ -110,7 +110,7 @@ class ContactData extends Component {
 
   orderHandler = async (event) => {
     event.preventDefault();
-    const {ingredients, price, onOrderBurger, loading} = this.props;
+    const {ingredients, price, onOrderBurger} = this.props;
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
