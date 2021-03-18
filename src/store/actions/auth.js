@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import axios from "../../axios-auth";
 
 export const authStart = () => {
   return {
@@ -21,8 +22,20 @@ export const authFail = (error) => {
 };
 
 export const auth = (email, password) => {
-  return dispatch => {
+  return async dispatch => {
     dispatch(authStart());
-    // ...
+    try {
+      const data = {
+        email,
+        password,
+        returnSecureToken: true
+      };
+      const response = (await axios.post(`accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`, data)).data;
+      console.log(response);
+      dispatch(authSuccess(response));
+    } catch (error) {
+      console.log(error.response);
+      dispatch(authFail(error));
+    }
   }
 }
