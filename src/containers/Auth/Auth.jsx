@@ -1,6 +1,9 @@
 import React, {Component} from "react";
+import { connect } from 'react-redux';
+
 import Input from "../../components/UI/Input/Input";
 import { checkValidity } from "../../utilities/validation";
+import { auth } from "../../store/actions";
 
 class Auth extends Component {
   state = {
@@ -49,6 +52,11 @@ class Auth extends Component {
     this.setState({controls: updatedControls});
   }
 
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+  }
+
   render() {
     const formElementsArray = [];
     for(let key in this.state.controls) {
@@ -60,7 +68,7 @@ class Auth extends Component {
       }
     }
     let form = (
-      <form onSubmit={this.orderHandler} className="w-full">
+      <form onSubmit={this.submitHandler} className="w-full">
         <div className="w-full">
           {formElementsArray.map(formElement => <Input elementType={formElement.config.elementType}
                                                        elementConfig={formElement.config.elementConfig}
@@ -72,7 +80,7 @@ class Auth extends Component {
                                                        key={formElement.id}/>)}
           <div className="w-full p-2 ">
             <button
-              disabled={!this.state.formIsValid}
+              //disabled={!this.state.formIsValid}
               className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">
               Sign-in
             </button>
@@ -93,4 +101,10 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuth: (email, password) => dispatch(auth(email, password)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);
