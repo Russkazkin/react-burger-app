@@ -8,12 +8,14 @@ const desktopNavigation = (props) => {
   const links = {
     burger: '/burger',
     orders: '/orders',
+    auth: '/auth'
   };
   return (
   <div className="hidden sm:block sm:ml-6">
     <div className="flex space-x-4">
       <DesktopNavigationItem link={links.burger} active={path === links.burger}>Burger Builder</DesktopNavigationItem>
       <DesktopNavigationItem link={links.orders} active={path === links.orders}>Orders</DesktopNavigationItem>
+      <DesktopNavigationItem link={links.auth} active={path === links.auth}>Sign-in</DesktopNavigationItem>
     </div>
   </div>
   )};
