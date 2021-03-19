@@ -36,7 +36,8 @@ class Auth extends Component {
         valid: false,
         touched: false
       },
-    }
+    },
+    isSignup: true,
   }
 
   inputChangedHandler = (event, controlName) => {
@@ -54,8 +55,14 @@ class Auth extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
   }
+
+  switchAuthModeHandler = () => this.setState(prevState => {
+    return {
+      isSignup: !prevState.isSignup
+    }
+  });
 
   render() {
     const formElementsArray = [];
@@ -82,7 +89,7 @@ class Auth extends Component {
             <button
               //disabled={!this.state.formIsValid}
               className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">
-              Sign-in
+              Submit
             </button>
           </div>
         </div>
@@ -94,6 +101,11 @@ class Auth extends Component {
         <div className="flex flex-col w-full p-8 mx-auto mt-10 border rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
           <div className="flex flex-wrap -m-2">
             {form}
+            <button
+              onClick={this.switchAuthModeHandler}
+              className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">
+              Switch to {this.state.isSignup ? 'sign-in' : 'sign-up'}
+            </button>
           </div>
         </div>
       </div>
@@ -103,7 +115,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password) => dispatch(auth(email, password)),
+    onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
   }
 }
 

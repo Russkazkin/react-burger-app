@@ -21,7 +21,7 @@ export const authFail = (error) => {
   };
 };
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignup) => {
   return async dispatch => {
     dispatch(authStart());
     try {
@@ -30,7 +30,12 @@ export const auth = (email, password) => {
         password,
         returnSecureToken: true
       };
-      const response = (await axios.post(`accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`, data)).data;
+      let response;
+      if(isSignup) {
+        response = (await axios.post(`accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`, data)).data;
+      } else {
+        response = (await axios.post(`accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`, data)).data;
+      }
       console.log(response);
       dispatch(authSuccess(response));
     } catch (error) {
