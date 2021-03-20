@@ -7,10 +7,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (data) => {
+export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    data
+    token,
+    userId
   };
 };
 
@@ -37,7 +38,7 @@ export const auth = (email, password, isSignup) => {
         response = (await axios.post(`accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`, data)).data;
       }
       console.log(response);
-      dispatch(authSuccess(response));
+      dispatch(authSuccess(response.idToken, response.localId));
     } catch (error) {
       console.log(error.response);
       dispatch(authFail(error));
