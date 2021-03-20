@@ -13,6 +13,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import orderReducer from "./store/reducers/order";
+import authReducer from "./store/reducers/auth";
 
 dotenv.config({path: '../.env'});
 
@@ -20,7 +21,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   burgerBuilderReducer,
-  orderReducer
+  orderReducer,
+  authReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
