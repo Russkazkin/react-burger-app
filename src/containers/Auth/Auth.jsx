@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
 
-import Input from "../../components/UI/Input/Input";
 import { checkValidity } from "../../utilities/validation";
 import { auth } from "../../store/actions";
+
+import Input from "../../components/UI/Input/Input";
+import Spinner from "../../components/UI/Spinner/Spinner";
+
 
 class Auth extends Component {
   state = {
@@ -65,6 +68,7 @@ class Auth extends Component {
   });
 
   render() {
+    const {loading} = this.props;
     const formElementsArray = [];
     for(let key in this.state.controls) {
       if (this.state.controls.hasOwnProperty(key)) {
@@ -75,37 +79,42 @@ class Auth extends Component {
       }
     }
     let form = (
-      <form onSubmit={this.submitHandler} className="w-full">
-        <div className="w-full">
-          {formElementsArray.map(formElement => <Input elementType={formElement.config.elementType}
-                                                       elementConfig={formElement.config.elementConfig}
-                                                       value={formElement.config.value}
-                                                       name={formElement.id}
-                                                       valid={formElement.config.valid}
-                                                       touched={formElement.config.touched}
-                                                       changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                                                       key={formElement.id}/>)}
-          <div className="w-full p-2 ">
-            <button
-              //disabled={!this.state.formIsValid}
-              className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">
-              Submit
-            </button>
+      <>
+        <form onSubmit={this.submitHandler} className="w-full">
+          <div className="w-full">
+            {formElementsArray.map(formElement => <Input elementType={formElement.config.elementType}
+                                                         elementConfig={formElement.config.elementConfig}
+                                                         value={formElement.config.value}
+                                                         name={formElement.id}
+                                                         valid={formElement.config.valid}
+                                                         touched={formElement.config.touched}
+                                                         changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                                                         key={formElement.id}/>)}
+            <div className="w-full p-2 ">
+              <button
+                //disabled={!this.state.formIsValid}
+                className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">
+                Submit
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+        <button
+          onClick={this.switchAuthModeHandler}
+          className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">
+          Switch to {this.state.isSignup ? 'sign-in' : 'sign-up'}
+        </button>
+      </>
     )
+    if (loading) {
+      form = <Spinner />
+    }
     return (
       <div className="container px-8 pt-24 pb-24 mx-auto lg:px-4">
         <h4 className="text-center font-bold text-lg mb-3">Enter your contact data</h4>
         <div className="flex flex-col w-full p-8 mx-auto mt-10 border rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
           <div className="flex flex-wrap -m-2">
             {form}
-            <button
-              onClick={this.switchAuthModeHandler}
-              className="disabled:opacity-40 w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform bg-brown-darkest rounded-lg hover:bg-brown-dark hover:to-brown focus:shadow-outline focus:outline-none focus:ring-2 ring-brown-lightest ring-offset-current ring-offset-2">
-              Switch to {this.state.isSignup ? 'sign-in' : 'sign-up'}
-            </button>
           </div>
         </div>
       </div>
@@ -113,10 +122,16 @@ class Auth extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    loading: state.authReducer.loading,
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
   }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
