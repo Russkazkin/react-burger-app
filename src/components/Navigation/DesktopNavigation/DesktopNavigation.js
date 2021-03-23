@@ -16,7 +16,7 @@ const desktopNavigation = ({isAuthenticated, history}) => {
       <div className="flex space-x-4">
         <DesktopNavigationItem link={links.burger} active={path === links.burger}>Burger Builder</DesktopNavigationItem>
         <DesktopNavigationItem link={links.orders} active={path === links.orders}>Orders</DesktopNavigationItem>
-        {isAuthenticated ?
+        {!isAuthenticated ?
           <DesktopNavigationItem link={links.auth} active={path === links.auth}>Sign-in</DesktopNavigationItem> :
           <DesktopNavigationItem link={links.logout} active={path === links.logout}>Logout</DesktopNavigationItem>}
       </div>
