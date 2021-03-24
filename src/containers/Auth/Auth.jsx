@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { checkValidity } from "../../utilities/validation";
-import { auth } from "../../store/actions";
+import { auth, setAuthRedirectPath } from "../../store/actions";
 
 import Input from "../../components/UI/Input/Input";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -44,6 +44,12 @@ class Auth extends Component {
     isSignup: true,
   }
 
+  componentDidMount() {
+    if (!this.props.building && this.props.authRedirectPath !== '/') {
+      this.props.onSetAuthRedirectPath();
+    }
+  }
+
   inputChangedHandler = (event, controlName) => {
     const updatedControls = {
       ...this.state.controls,
@@ -69,7 +75,7 @@ class Auth extends Component {
   });
 
   render() {
-    const {loading, error, isAuthenticated} = this.props;
+    const {loading, error, isAuthenticated, authRedirectPath} = this.props;
     const formElementsArray = [];
     for(let key in this.state.controls) {
       if (this.state.controls.hasOwnProperty(key)) {
@@ -117,7 +123,7 @@ class Auth extends Component {
     }
     let authRedirect = null;
     if (isAuthenticated) {
-      authRedirect = <Redirect to="/" />
+      authRedirect = <Redirect to={authRedirectPath} />
     }
     return (
       <div className="container px-8 pt-24 pb-24 mx-auto lg:px-4">
@@ -138,13 +144,16 @@ const mapStateToProps = state => {
   return {
     loading: state.authReducer.loading,
     error: state.authReducer.error,
-    isAuthenticated: state.authReducer.token !== null
+    isAuthenticated: state.authReducer.token !== null,
+    building: state.burgerBuilderReducer.building,
+    authRedirectPath: state.authReducer.authRedirectPath,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
+    onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/'))
   }
 }
 
