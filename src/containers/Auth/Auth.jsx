@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { checkValidity } from "../../utilities/validation";
 import { auth } from "../../store/actions";
@@ -68,7 +69,7 @@ class Auth extends Component {
   });
 
   render() {
-    const {loading, error} = this.props;
+    const {loading, error, isAuthenticated} = this.props;
     const formElementsArray = [];
     for(let key in this.state.controls) {
       if (this.state.controls.hasOwnProperty(key)) {
@@ -114,8 +115,13 @@ class Auth extends Component {
     if (error) {
       errorMessage = <p className="text-center px-3 py-3 bg-red-300 w-4/5 justify-center mx-auto mb-5 text-red-800 rounded-md">{error.message}</p>;
     }
+    let authRedirect = null;
+    if (isAuthenticated) {
+      authRedirect = <Redirect to="/" />
+    }
     return (
       <div className="container px-8 pt-24 pb-24 mx-auto lg:px-4">
+        {authRedirect}
         {errorMessage}
         <h4 className="text-center font-bold text-lg mb-3">Enter your contact data</h4>
         <div className="flex flex-col w-full p-8 mx-auto mt-10 border rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
@@ -131,7 +137,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.authReducer.loading,
-    error: state.authReducer.error
+    error: state.authReducer.error,
+    isAuthenticated: state.authReducer.token !== null
   };
 };
 
