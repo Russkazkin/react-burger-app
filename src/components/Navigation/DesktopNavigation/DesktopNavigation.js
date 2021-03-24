@@ -15,7 +15,9 @@ const desktopNavigation = ({isAuthenticated, history}) => {
     <div className="hidden sm:block sm:ml-6">
       <div className="flex space-x-4">
         <DesktopNavigationItem link={links.burger} active={path === links.burger}>Burger Builder</DesktopNavigationItem>
-        <DesktopNavigationItem link={links.orders} active={path === links.orders}>Orders</DesktopNavigationItem>
+        {isAuthenticated ?
+          <DesktopNavigationItem link={links.orders} active={path === links.orders}>Orders</DesktopNavigationItem> :
+          null}
         {!isAuthenticated ?
           <DesktopNavigationItem link={links.auth} active={path === links.auth}>Sign-in</DesktopNavigationItem> :
           <DesktopNavigationItem link={links.logout} active={path === links.logout}>Logout</DesktopNavigationItem>}
