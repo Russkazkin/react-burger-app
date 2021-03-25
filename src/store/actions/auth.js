@@ -52,6 +52,9 @@ export const auth = (email, password, isSignup) => {
         response = (await axios.post(`accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`, data)).data;
       }
       console.log(response);
+      const expirationDate = new Date(new Date().getTime() + response.expiresIn * 1000);
+      localStorage.setItem('token', response.idToken);
+      localStorage.setItem('expirationDate', expirationDate);
       dispatch(authSuccess(response.idToken, response.localId));
       dispatch(checkAuthTimeout(response.expiresIn));
     } catch (error) {
