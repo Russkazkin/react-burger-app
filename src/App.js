@@ -19,8 +19,18 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <Layout>
+    const {isAuthenticated} = this.props;
+    let routes = (
+      <Switch>
+        <Redirect exact from="/" to="/burger" />
+        <Route path="/burger" component={BurgerBuilder} />
+        <Route path="/auth" component={Auth} />
+        <Redirect to="/burger" />
+      </Switch>
+    );
+
+    if (isAuthenticated) {
+      routes = (
         <Switch>
           <Redirect exact from="/" to="/burger" />
           <Route path="/burger" component={BurgerBuilder} />
@@ -28,9 +38,21 @@ class App extends Component {
           <Route path="/orders" component={Orders} />
           <Route path="/auth" component={Auth} />
           <Route path="/logout" component={Logout} />
+          <Redirect to="/burger" />
         </Switch>
+      );
+    }
+    return (
+      <Layout>
+        {routes}
       </Layout>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.authReducer.token !== null,
   }
 }
 
@@ -39,4 +61,4 @@ const mapDispatchToProps = dispatch => {
     onTryAutoSignIn: () => dispatch(authCheckState()),
   }
 }
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
