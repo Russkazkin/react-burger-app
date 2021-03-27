@@ -111,14 +111,15 @@ class ContactData extends Component {
 
   orderHandler = async (event) => {
     event.preventDefault();
-    const {ingredients, price, onOrderBurger} = this.props;
+    const {ingredients, price, onOrderBurger, userId} = this.props;
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
     }
     const order = {
-      ingredients: ingredients,
-      price: price,
+      userId,
+      ingredients,
+      price,
       orderData: formData,
     }
     onOrderBurger(order, this.props.token);
@@ -186,7 +187,8 @@ const mapStateToProps = state => {
     ingredients: state.burgerBuilderReducer.ingredients,
     price: state.burgerBuilderReducer.totalPrice,
     loading: state.orderReducer.loading,
-    token: state.authReducer.token
+    token: state.authReducer.token,
+    userId: state.authReducer.userId,
   }
 }
 
