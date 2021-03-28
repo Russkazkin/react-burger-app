@@ -6,7 +6,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import { purchaseBurger } from "../../../store/actions";
-import { checkValidity } from "../../../utilities/validation";
+import { checkValidity } from "../../../shared/validation";
 import {updateObject} from "../../../shared/utility";
 
 class ContactData extends Component {

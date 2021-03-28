@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { checkValidity } from "../../utilities/validation";
+import { checkValidity } from "../../shared/validation";
 import { auth, setAuthRedirectPath } from "../../store/actions";
 
 import Input from "../../components/UI/Input/Input";
