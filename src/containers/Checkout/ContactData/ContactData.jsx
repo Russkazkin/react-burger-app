@@ -7,6 +7,7 @@ import Input from "../../../components/UI/Input/Input";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import { purchaseBurger } from "../../../store/actions";
 import { checkValidity } from "../../../utilities/validation";
+import {updateObject} from "../../../shared/utility";
 
 class ContactData extends Component {
   state = {
@@ -126,16 +127,20 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedOrderForm = {...this.state.orderForm};
-    const updatedFormElement = {...updatedOrderForm[inputIdentifier]};
-    updatedFormElement.touched = true;
-    updatedFormElement.value = event.target.value;
-    updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation)
-    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+      touched: true,
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation)
+    });
+    const updatedOrderForm = updateObject(this.state.orderForm, {
+      [inputIdentifier]: updatedFormElement
+    });
 
     let formIsValid = true;
     for (let formIdentifier in updatedOrderForm) {
-      formIsValid = updatedOrderForm[formIdentifier].valid && formIsValid;
+      if (updatedOrderForm.hasOwnProperty(formIdentifier)) {
+        formIsValid = updatedOrderForm[formIdentifier].valid && formIsValid;
+      }
     }
     this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
   };
