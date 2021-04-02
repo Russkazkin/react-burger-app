@@ -14,7 +14,7 @@ describe('<DesktopNavigation />', () => {
   });
   it('should render three <DesktopNavigationItem /> elements if authenticated', () => {
     const history = {location: {path: '/fake-path'}};
-    const wrapper = shallow(<DesktopNavigation.WrappedComponent history={history} isAuthenticate={true} />);
-    expect(wrapper.find(DesktopNavigationItem)).toHaveLength(2);
+    const wrapper = shallow(<DesktopNavigation.WrappedComponent history={history} isAuthenticated={true} />);
+    expect(wrapper.find(DesktopNavigationItem)).toHaveLength(3);
   });
 });
